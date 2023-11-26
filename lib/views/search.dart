@@ -1,7 +1,49 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:receive_sharing_intent/receive_sharing_intent.dart';
+import 'package:twitter_extractor/twitter_extractor.dart';
 
-class Search extends StatelessWidget {
+class Search extends StatefulWidget {
   const Search({super.key});
+
+  @override
+  State<Search> createState() => _SearchState();
+}
+
+class _SearchState extends State<Search> {
+  StreamSubscription? _dataStreamSubscription;
+  String _sharedText = "";
+  final TextEditingController _searchBar = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+
+    _dataStreamSubscription =
+        ReceiveSharingIntent.getTextStream().listen((String text) {
+      setState(() {
+        _sharedText = text;
+      });
+    });
+    ReceiveSharingIntent.getInitialText().then((String? value) {
+      setState(() {
+        _sharedText = value!;
+      });
+    });
+  }
+
+  void getLinks(String url) async {
+    Twitter tweet = await TwitterExtractor.extract(url);
+    for (var i in tweet.videos) {
+      print(i);
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _dataStreamSubscription!.cancel();
+    _searchBar.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +68,12 @@ class Search extends StatelessWidget {
                   ),
                 ],
               ),
-              child: const SizedBox(
+              child: SizedBox(
                 height: 50,
                 child: TextField(
-                  style: TextStyle(color: Colors.black),
-                  decoration: InputDecoration(
+                  controller: _searchBar,
+                  style: const TextStyle(color: Colors.black),
+                  decoration: const InputDecoration(
                     filled: true,
                     fillColor: Colors.white,
                     hintText: "Paste Your URL....",
@@ -63,7 +106,12 @@ class Search extends StatelessWidget {
                 child: SizedBox(
                   height: 50,
                   child: MaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        _sharedText = _searchBar.text.toString();
+                      });
+                      getLinks(_searchBar.text.toString());
+                    },
                     color: const Color(0xff014bf4),
                     child: const Center(
                       child: Text(
@@ -72,7 +120,15 @@ class Search extends StatelessWidget {
                       ),
                     ),
                   ),
-                ))
+                )),
+            const SizedBox(height: 20),
+            Text(
+              _sharedText,
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
+            )
           ],
         ),
       ),

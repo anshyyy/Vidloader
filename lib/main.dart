@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vidloader/views/home.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 

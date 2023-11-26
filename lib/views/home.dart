@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vidloader/views/search.dart';
 
+import 'downloads.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -13,35 +15,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: const Text(
-          "Vidloader",
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: const Color(0xff014bf4),
-        actions: [
-          Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child: IconButton(
-                icon: const Icon(
-                  Icons.settings_sharp,
-                  color: Colors.white,
-                ),
-                onPressed: (() {
-                  // go to download page
-                }),
-              ))
-        ],
-      ),
       body: Container(
-        child: const [
-          Center(
+        child: [
+          const Center(
             child: Search(),
           ),
           Center(
-            child: Text(
-              'Unlearn 🐛',
+            child: DownloadPage(
+              fileUrl: '',
+              pushed: 0,
             ),
           ),
         ][selectedPageIndex],

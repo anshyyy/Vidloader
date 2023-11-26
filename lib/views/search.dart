@@ -62,8 +62,10 @@ class _SearchState extends State<Search> {
                 onPressed: (() {
                   // go to setting page
 
-                  PageTransition(
-                      type: PageTransitionType.fade, child: Settings());
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          type: PageTransitionType.fade, child: Settings()));
                 }),
               ))
         ],

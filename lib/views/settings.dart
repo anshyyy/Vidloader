@@ -9,7 +9,7 @@ class Settings extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         title: const Text(
-          "Downloads",
+          "Settings",
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: const Color(0xff014bf4),

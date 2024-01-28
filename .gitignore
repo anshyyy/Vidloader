@@ -27,10 +27,6 @@ migrate_working_dir/
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
-<<<<<<< HEAD
-.packages
-=======
->>>>>>> main
 .pub-cache/
 .pub/
 /build/
@@ -45,11 +41,3 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-<<<<<<< HEAD
-web
-windows
-macos
-linux
-lib/.env
-=======
->>>>>>> main

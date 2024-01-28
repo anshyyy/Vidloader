@@ -74,10 +74,26 @@ class _DownloadTileState extends State<DownloadTile> {
         padding: const EdgeInsets.only(top: 5.0, bottom: 5),
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(3),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black,
+                offset: Offset(
+                  4.0,
+                  1.0,
+                ),
+                blurRadius: 5.0,
+                spreadRadius: 1.0,
+              ), //BoxShadow
+              BoxShadow(
+                color: Colors.white,
+                offset: Offset(0.0, 0.0),
+                blurRadius: 0.0,
+                spreadRadius: 0.0,
+              ), //BoxShadow
+            ],
             border: Border.all(
               color: Colors.black,
-              width: 1,
+              width: 2,
             ),
           ),
           child: downloadAbleUrl == ""
@@ -123,8 +139,8 @@ class _DownloadTileState extends State<DownloadTile> {
                                 Container(
                                   width: 2.2 * _progress,
                                   decoration: BoxDecoration(
-                                    color: Colors
-                                        .green, // Green color as download progresses
+                                    color: const Color(
+                                        0xFF39FF14), // Green color as download progresses
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),

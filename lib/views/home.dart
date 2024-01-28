@@ -33,20 +33,18 @@ class _HomePageState extends State<HomePage> {
       style: optionStyle,
     ),
   ];
+  List<Widget> _pages = [
+    Search(),
+    DownloadPage(
+      fileUrl: '',
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: [
-          const Center(
-            child: Search(),
-          ),
-          Center(
-            child: DownloadPage(
-              fileUrl: '',
-            ),
-          ),
-        ][_selectedIndex],
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _pages,
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
@@ -62,14 +60,14 @@ class _HomePageState extends State<HomePage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
             child: GNav(
-              rippleColor: Color(0xff014bf4),
+              rippleColor: const Color(0xff014bf4),
               hoverColor: Colors.grey[100]!,
               gap: 20,
               activeColor: Colors.white,
               iconSize: 24,
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              duration: Duration(milliseconds: 400),
-              tabBackgroundColor: Color(0xff014bf4),
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+              duration: const Duration(milliseconds: 400),
+              tabBackgroundColor: const Color(0xff014bf4),
               color: Colors.black,
               tabs: const [
                 GButton(
